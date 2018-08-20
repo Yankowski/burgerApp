@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Auxiliary from '../../hoc/Auxiliary'
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -19,10 +21,11 @@ class BurgerBuilder extends Component {
             meat:0
         },
         totalPrice: 4,
-        purchasable:false
+        purchasable:false,
+        purchasing:false
     }
 
-    addIngredientHadnler = (type) => {
+    addIngredientHandler = (type) => {
         const oldCount = this.state.ingrediens[type];
         const updatedCount = oldCount +1;
         const updatedIngredient ={
@@ -34,6 +37,11 @@ class BurgerBuilder extends Component {
         const newPrice = oldPrice + priceAddition;
         this.setState({totalPrice: newPrice, ingrediens: updatedIngredient});
         this.updatePurchaseState(updatedIngredient);
+    }
+
+    purchaseHandler= () => {
+        this.setState({purchasing:true})
+        console.log("Hhhhh");
     }
 
      removeIngredientHadnler = (type) => {
@@ -74,14 +82,18 @@ class BurgerBuilder extends Component {
 
         return(
             <Auxiliary>
+                <Modal show={this.state.purchasing}>
+                    <OrderSummary ingredients={this.state.ingrediens}></OrderSummary>
+                </Modal>
                 <Burger ingredients={this.state.ingrediens}/>
                 
                 <BuildControls
-                    ingredientAdded={this.addIngredientHadnler}
+                    ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHadnler}
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
                     purchasable={this.state.purchasable}
+                    ordered={this.purchaseHandler}
                 />
             </Auxiliary>
         );
