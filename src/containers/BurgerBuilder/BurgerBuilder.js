@@ -18,7 +18,8 @@ class BurgerBuilder extends Component {
             cheese:0,
             meat:0
         },
-        totalPrice: 4
+        totalPrice: 4,
+        purchasable:false
     }
 
     addIngredientHadnler = (type) => {
@@ -32,30 +33,55 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
         this.setState({totalPrice: newPrice, ingrediens: updatedIngredient});
+        this.updatePurchaseState(updatedIngredient);
     }
 
      removeIngredientHadnler = (type) => {
-         const oldCount = this.state.ingrediens[type];
+        const oldCount = this.state.ingrediens[type];
+        if (oldCount <1) {
+            return;
+        }
         const updatedCount = oldCount -1;
         const updatedIngredient ={
             ...this.state.ingrediens
         };
         updatedIngredient[type] = updatedCount;
-        const priceSubtraction = INGREDIENT_PRICES[type]
+        const priceDeduction = INGREDIENT_PRICES[type]
         const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceSubtraction;
+        const newPrice = oldPrice - priceDeduction;
         this.setState({totalPrice: newPrice, ingrediens: updatedIngredient});
+        this.updatePurchaseState(updatedIngredient);
     }
 
+    updatePurchaseState (updatedIngredient) {
+  
+       const sum = Object.keys(updatedIngredient)
+                    .map(igKey => {
+                        return updatedIngredient[igKey]
+                    }).reduce((sum,el) => {
+                    return sum+el},0);
+
+       this.setState({purchasable: sum >0})                  
+    }
 
     render() {
+       const disabledInfo= {
+           ...this.state.ingrediens
+       };
+       for (let key in disabledInfo) {
+           disabledInfo[key] = disabledInfo[key] <= 0
+       }     
+
         return(
             <Auxiliary>
                 <Burger ingredients={this.state.ingrediens}/>
-                <p  > Price: {this.state.totalPrice} US Dollars</p>
+                
                 <BuildControls
                     ingredientAdded={this.addIngredientHadnler}
                     ingredientRemoved={this.removeIngredientHadnler}
+                    disabled={disabledInfo}
+                    price={this.state.totalPrice}
+                    purchasable={this.state.purchasable}
                 />
             </Auxiliary>
         );

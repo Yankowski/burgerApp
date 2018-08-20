@@ -15,7 +15,7 @@
     }
 }
 
-@media (min-width:1000px) and (min-height: 700px){
+@media (min-width:1000px) and (min-height: 500px){
     .Burger{
         width: 700px;
         height: 600px;
