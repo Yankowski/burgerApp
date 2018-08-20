@@ -41,7 +41,9 @@ class BurgerBuilder extends Component {
 
     purchaseHandler= () => {
         this.setState({purchasing:true})
-        console.log("Hhhhh");
+    }
+     purchaseCancelHandler= () => {
+        this.setState({purchasing:false})
     }
 
      removeIngredientHadnler = (type) => {
@@ -82,7 +84,7 @@ class BurgerBuilder extends Component {
 
         return(
             <Auxiliary>
-                <Modal show={this.state.purchasing}>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingrediens}></OrderSummary>
                 </Modal>
                 <Burger ingredients={this.state.ingrediens}/>
