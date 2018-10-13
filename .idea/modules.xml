@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/burgerApp.iml" filepath="$PROJECT_DIR$/burgerApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../routing-01-start/routing-01-start.iml" filepath="$PROJECT_DIR$/../routing-01-start/routing-01-start.iml" />
     </modules>
   </component>
 </project>

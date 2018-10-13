@@ -58,16 +58,16 @@ class BurgerBuilder extends Component {
         this.setState({purchasing: false})
     }
     purchaseContinueHandler = () => {
-        this.setState({loading: true});
+       /* this.setState({loading: true});
         const order = {
             ingredients: this.state.ingredients,
             price: this.state.totalPrice,
             customer: {
-                name: 'Max Schwarzmüller',
+                name: 'Johny',
                 address: {
-                    street: 'Teststreet 1',
-                    zipCode: '41351',
-                    country: 'Germany'
+                    street: 'Ajoj 1',
+                    zipCode: '2323',
+                    country: 'Poland'
                 },
                 email: 'test@test.com'
             },
@@ -79,7 +79,8 @@ class BurgerBuilder extends Component {
             })
             .catch(error => {
                 this.setState({loading: false, purchasing: false});
-            });
+            });*/
+    this.props.history.push('/checkout')
     }
 
     removeIngredientHandler = (type) => {
