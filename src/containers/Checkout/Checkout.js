@@ -3,13 +3,8 @@ import {Route, Redirect} from 'react-router-dom'
 import CheckoutSummary from '../../components/Order/CheckoutSummanry/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import {connect} from 'react-redux';
-import * as actions from '../../store/actions/index'
 
 class Checkout extends Component {
-
-    componentWillMount() {
-        this.props.onInitPurchase();
-    }
 
     onCheckoutCanceledHandler = () => {
         this.props.history.goBack();
@@ -46,10 +41,5 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchProps = dispatch => {
-    return {
-        onInitPurchase: () => dispatch(actions.purchaseInit())
 
-    }
-}
-export default connect(mapStateToProps, mapDispatchProps)(Checkout);
+export default connect(mapStateToProps)(Checkout);
