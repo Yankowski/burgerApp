@@ -7,6 +7,7 @@ return (
     <ul className={classes.NavigationItems}>
         <NavigationItem exact link="/" >Burger Builder</NavigationItem>
         <NavigationItem link="/orders">Orders</NavigationItem>
+        <NavigationItem link="/auth">Authentication</NavigationItem>
     </ul>
 ) ;
 }
