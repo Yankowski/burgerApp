@@ -10,3 +10,6 @@ export {
     fetchOrdersFail,
     fetchOrdersSuccess
 } from './order'
+export {
+    auth
+} from './auth';
