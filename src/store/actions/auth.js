@@ -37,7 +37,7 @@ export const logout = () => {
 
 }
 
-export const auth = (email, password,isSignIn) => {
+export const auth = (email, password, isSignIn) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -49,7 +49,7 @@ export const auth = (email, password,isSignIn) => {
         if (!isSignIn) {
             url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAw9OW4yW0KfWADVwGqkntJ5MjN8q0V1rI'
         }
-        axios.post(url,authData)
+        axios.post(url, authData)
             .then(response => {
                 console.log(response);
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
