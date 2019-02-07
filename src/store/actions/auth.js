@@ -70,7 +70,7 @@ export const auth = (email, password, isSignIn) => {
 
 export const setAuthRedirectPath = (path) => {
     return {
-        type: actionTypes.SET_AUTH_REDIRECT,
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
         path: path
     }
 };
