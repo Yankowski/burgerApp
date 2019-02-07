@@ -1,5 +1,18 @@
-export {addIngredient,
+export {
+    addIngredient,
     removeIngredient,
     initIngredients
 } from './burgerBuilder';
-export {purchaseBurgerStart} from './order'
+export {
+    purchaseBurger,
+    purchaseInit,
+    fetchOrders,
+    fetchOrdersFail,
+    fetchOrdersSuccess
+} from './order'
+export {
+    auth,
+    logout,
+    setAuthRedirectPath,
+    authCheckState
+} from './auth';
