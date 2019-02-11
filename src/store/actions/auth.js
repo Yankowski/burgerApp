@@ -31,14 +31,11 @@ export const checkAuthTimeout = (expirationTime) => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationData');
-    localStorage.removeItem('userId');
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_INITIATIVE_LOGOUT
     }
 
-}
+};
 
 export const auth = (email, password, isSignIn) => {
     return dispatch => {

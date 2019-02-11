@@ -13,7 +13,8 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import authReducer from './store/reducers/auth';
 import order from './store/reducers/order';
-
+import createSagaMiddleWare from 'redux-saga'
+import {watchAuth} from './store/sagas/index'
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -22,16 +23,19 @@ const rootReducer = combineReducers({
     order: order,
     auth: authReducer,
 });
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+const sagaMiddleWare = createSagaMiddleWare();
 
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunk, sagaMiddleWare)
+));
+sagaMiddleWare.run(watchAuth);
 const app = (<Provider store={store}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>
     </Provider>
 );
+
 
 ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
