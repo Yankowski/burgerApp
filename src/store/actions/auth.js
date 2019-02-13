@@ -23,10 +23,9 @@ export const authFail = (error) => {
 };
 
 export const checkAuthTimeout = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout());
-        }, expirationTime * 1000)
+    return {
+        type: actionTypes.AUTH_CHECK_TIMEOUT,
+        expirationTime: expirationTime
     }
 }
 
@@ -34,8 +33,13 @@ export const logout = () => {
     return {
         type: actionTypes.AUTH_INITIATIVE_LOGOUT
     }
-
 };
+
+export const logoutSucceed = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
 
 export const auth = (email, password, isSignIn) => {
     return dispatch => {
@@ -84,8 +88,8 @@ export const authCheckState = () => {
 
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token,userId));
-                dispatch(checkAuthTimeout((expirationData.getTime() - new Date().getTime())/1000))
+                dispatch(authSuccess(token, userId));
+                dispatch(checkAuthTimeout((expirationData.getTime() - new Date().getTime()) / 1000))
             }
         }
     }
